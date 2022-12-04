@@ -3,11 +3,10 @@ require('dotenv').config();
 
 const app = express();
 
-app.get('/', (req, res) => {
-	res.send({
-		message: 'Hello World',
-	});
-});
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+
+app.use('/api/auth', require('./routes/authRoutes'));
 
 app.listen(process.env.PORT, () => {
 	console.log(`listening on port ${process.env.PORT}`);
