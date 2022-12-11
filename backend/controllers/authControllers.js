@@ -1,23 +1,18 @@
-const firebase = require('../config/config');
 const asyncHandler = require('express-async-handler');
+const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 
-// @desc    Register new user
-// @route   POST /api/signup
-// @access  Public
-const registerUser = asyncHandler(async () => {
-	const userResponse = await auth.auth().createUser({
-		email: req.body.email,
-		password: req.body.password,
-		emailVerified: false,
-		disabled: false,
-	});
+const auth = getAuth();
+
+const createUser = asyncHandler(async (req, res) => {
+	const userResponse = await createUserWithEmailAndPassword(
+		auth,
+		'test@test.com',
+		'abc1234#',
+	);
 
 	res.send(userResponse);
 });
 
-// @desc    Authenticate a user
-// @route   POST /api/login
-// @access  Public
-const loginUser = asyncHandler(async () => {});
+const loginUser = asyncHandler(async (req, res) => {});
 
-module.export = { registerUser, loginUser };
+module.exports = { createUser };

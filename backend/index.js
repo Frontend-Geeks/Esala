@@ -1,10 +1,8 @@
 const express = require('express');
 require('dotenv').config();
+const firebase = require('./config');
 
 const app = express();
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', require('./routes/authRoutes'));
 
