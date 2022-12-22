@@ -13,6 +13,7 @@
   "author": "Oshadha Shiro",
   "license": "ISC",
   "dependencies": {
+    "@tabler/icons": "^1.118.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
