@@ -1,8 +1,33 @@
-const Dashboard = () => {
+import { Grid, Text, MediaQuery } from '@mantine/core';
+
+const Dashboard = ({ data }: any) => {
 	return (
-		<div>
-			<h1>Dashboard</h1>
-		</div>
+		<Grid
+			p="md"
+			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+		>
+			{data.DashboardItems.map((element: string) => (
+				<Grid.Col
+					span={3}
+					sx={{
+						backgroundColor: '#606060',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						height: '225px',
+						width: '200px',
+						borderRadius: '10px',
+						margin: '15px 40px 15px 40px',
+					}}
+				>
+					<Text sx={{ fontSize: '20px', fontWeight: 450 }}>{element}</Text>
+				</Grid.Col>
+			))}
+		</Grid>
 	);
 };
 
