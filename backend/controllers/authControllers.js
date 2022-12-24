@@ -6,13 +6,14 @@ const auth = getAuth();
 const createUser = asyncHandler(async (req, res) => {
 	const userResponse = await createUserWithEmailAndPassword(
 		auth,
-		'test@test.com',
+		'test1@test.com',
 		'abc1234#',
 	);
 
+	console.log(userResponse);
 	res.send(userResponse);
 });
 
 const loginUser = asyncHandler(async (req, res) => {});
 
-module.exports = { createUser };
+module.exports = { createUser, loginUser };
