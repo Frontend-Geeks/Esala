@@ -48,7 +48,7 @@ const Header = ({ opened, setOpened, theme }: any) => {
 					placeholder="Search Subject, Grade"
 					styles={{
 						input: {
-							backgroundColor: '#111',
+							backgroundColor: '#606060',
 							color: '#fff',
 							outline: 'none',
 							border: 'none',
