@@ -12,9 +12,7 @@ import logo from '../../assets/logo.png';
 import { IconSearch } from '@tabler/icons';
 import { Link } from 'react-router-dom';
 
-const NavbarElements = ['Home', 'Lessons', 'Games'];
-
-const Header = ({ opened, setOpened, theme }: any) => {
+const Header = ({ opened, setOpened, theme, data }: any) => {
 	return (
 		<HeaderBar
 			height={{ base: 80, md: 85 }}
@@ -41,7 +39,6 @@ const Header = ({ opened, setOpened, theme }: any) => {
 					height={70}
 					alt="Esala Logo"
 				/>
-
 				<Input
 					icon={<IconSearch />}
 					variant="filled"
@@ -55,7 +52,6 @@ const Header = ({ opened, setOpened, theme }: any) => {
 						},
 					}}
 				/>
-
 				<MediaQuery query="(max-width: 728px)" styles={{ display: 'none' }}>
 					<List
 						sx={{
@@ -63,7 +59,7 @@ const Header = ({ opened, setOpened, theme }: any) => {
 							display: 'flex',
 						}}
 					>
-						{NavbarElements.map((element) => (
+						{data.NavElements.map((element: any) => (
 							<List.Item
 								sx={{
 									margin: '0 15px 0 15px',
@@ -123,7 +119,6 @@ const Header = ({ opened, setOpened, theme }: any) => {
 						/>
 					</div>
 				</MediaQuery>
-
 				<MediaQuery query="(min-width: 728px)" styles={{ display: 'none' }}>
 					<Burger
 						opened={opened}
