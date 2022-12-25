@@ -1,11 +1,13 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Register from './pages/Register';
 import Header from './Components/Header/Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMantineTheme } from '@mantine/core';
 import Lessons from './pages/Lessons';
 import Games from './pages/Games';
+import { useSelector } from 'react-redux';
+import './styles/App.css';
 
 const data = {
 	NavElements: ['Home', 'Lessons', 'Games'],
@@ -32,9 +34,9 @@ function App() {
 			<Header opened={opened} setOpened={setOpened} theme={theme} data={data} />
 			<Routes>
 				<Route path="/" element={<Dashboard data={data} />} />
-				<Route path="/register" element={<Register />} />
 				<Route path="/lessons" element={<Lessons />} />
 				<Route path="/games" element={<Games />} />
+				<Route path="/register" element={<Register />} />
 			</Routes>
 		</div>
 	);
