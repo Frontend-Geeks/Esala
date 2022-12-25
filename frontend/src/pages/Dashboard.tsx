@@ -1,10 +1,11 @@
-import { Grid, Text, MediaQuery } from '@mantine/core';
+import { Grid, Text } from '@mantine/core';
 
 const Dashboard = ({ data }: any) => {
 	return (
 		<Grid
 			p="md"
 			sx={{
+				width: '100%',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
