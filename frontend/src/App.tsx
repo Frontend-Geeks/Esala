@@ -1,12 +1,11 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
-import Register from './pages/Register';
+import Register from './pages/Register/Register';
 import Header from './Components/Header/Header';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useMantineTheme } from '@mantine/core';
 import Lessons from './pages/Lessons';
 import Games from './pages/Games';
-import { useSelector } from 'react-redux';
 import './styles/App.css';
 
 const data = {
@@ -24,10 +23,9 @@ const data = {
 	],
 };
 
-function App() {
+const App = () => {
 	const theme = useMantineTheme();
 	const [opened, setOpened] = useState(false);
-	// const navigate = useNavigate();
 
 	return (
 		<div>
@@ -40,6 +38,6 @@ function App() {
 			</Routes>
 		</div>
 	);
-}
+};
 
 export default App;
