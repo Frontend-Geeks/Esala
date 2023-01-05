@@ -2,46 +2,42 @@ import { useState } from 'react';
 import { Button, Grid, Input } from '@mantine/core';
 import { createStyles } from '@mantine/core';
 import Signup from './Signup';
+import Login from './Login';
+import styles from '../../styles/Register.module.css';
 
 const Register = () => {
 	const [selectedTab, setSelectedTab] = useState('signup');
 
 	return (
-		<Grid
-			sx={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}
-			m="xl"
-		>
-			<Grid.Col
-				span={4}
-				m="xl"
-				sx={{
-					backgroundColor: '#606060',
-					borderRadius: '15px',
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			>
-				<Grid.Col
-					sx={{
-						display: 'flex',
-						height: '200px',
-						alignItems: 'center',
-					}}
-				>
-					<div onClick={() => setSelectedTab('signup')}>Signup</div>
-					<div onClick={() => setSelectedTab('login')}>Login</div>
-				</Grid.Col>
-				<Grid.Col>
-					<Signup />
-				</Grid.Col>
-			</Grid.Col>
-		</Grid>
+		<div className={styles.wrapper}>
+			<div className={styles.form}>
+				<div className={styles.switchTabs}>
+					<button
+						className={styles.tab}
+						onClick={() => setSelectedTab('signup')}
+						style={{
+							backgroundColor: selectedTab === 'signup' ? '#292F33' : '#606060',
+						}}
+					>
+						Sign up
+					</button>
+					<button
+						className={styles.tab}
+						onClick={() => setSelectedTab('login')}
+						style={{
+							backgroundColor: selectedTab === 'login' ? '#292F33' : '#606060',
+						}}
+					>
+						Login
+					</button>
+				</div>
+				{selectedTab === 'signup' ? (
+					<Signup styles={styles} />
+				) : (
+					<Login styles={styles} />
+				)}
+			</div>
+		</div>
 	);
 };
 
