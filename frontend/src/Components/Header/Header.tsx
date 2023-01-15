@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
 	Text,
 	MediaQuery,
@@ -7,12 +8,21 @@ import {
 	Image,
 	Input,
 	Avatar,
+	Button,
 } from '@mantine/core';
 import logo from '../../assets/logo.png';
 import { IconSearch } from '@tabler/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Header = ({ opened, setOpened, theme, data }: any) => {
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		localStorage.removeItem('user');
+		navigate('/register');
+		toast.success('Logged out');
+	};
+
 	return (
 		<HeaderBar
 			height={{ base: 80, md: 85 }}
@@ -61,6 +71,7 @@ const Header = ({ opened, setOpened, theme, data }: any) => {
 					>
 						{data.NavElements.map((element: any) => (
 							<List.Item
+								key={element}
 								sx={{
 									margin: '0 15px 0 15px',
 									padding: '5px 10px 5px 10px',
@@ -87,37 +98,43 @@ const Header = ({ opened, setOpened, theme, data }: any) => {
 				</MediaQuery>
 
 				<MediaQuery query="(max-width: 728px)" styles={{ display: 'none' }}>
-					<div
-						style={{
-							width: '8rem',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'space-between',
-							background: '#111',
-							padding: '5px 12px 5px 12px',
-							borderRadius: '5px',
-						}}
-					>
-						<Text
-							sx={{
-								fontSize: '18px',
-								fontWeight: 500,
+					{localStorage.getItem('user') ? (
+						<Button onClick={handleLogout} color="dark">
+							Logout
+						</Button>
+					) : (
+						<div
+							style={{
+								width: '8rem',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+								background: '#111',
+								padding: '5px 12px 5px 12px',
+								borderRadius: '5px',
 							}}
 						>
-							Account
-						</Text>
-						<Avatar
-							src={null}
-							radius="xl"
-							size="md"
-							color="dark"
-							sx={{
-								display: 'flex',
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						/>
-					</div>
+							<Text
+								sx={{
+									fontSize: '18px',
+									fontWeight: 500,
+								}}
+							>
+								Account
+							</Text>
+							<Avatar
+								src={null}
+								radius="xl"
+								size="md"
+								color="dark"
+								sx={{
+									display: 'flex',
+									justifyContent: 'center',
+									alignItems: 'center',
+								}}
+							/>
+						</div>
+					)}
 				</MediaQuery>
 				<MediaQuery query="(min-width: 728px)" styles={{ display: 'none' }}>
 					<Burger
