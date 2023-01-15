@@ -24,6 +24,7 @@ const Dashboard = ({ data }: any) => {
 						borderRadius: '10px',
 						margin: '15px 40px 15px 40px',
 					}}
+					key={element}
 				>
 					<Text sx={{ fontSize: '20px', fontWeight: 450 }}>{element}</Text>
 				</Grid.Col>
