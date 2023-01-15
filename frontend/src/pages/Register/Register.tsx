@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Button, Grid, Input } from '@mantine/core';
-import { createStyles } from '@mantine/core';
 import Signup from './Signup';
 import Login from './Login';
 import styles from '../../styles/Register.module.css';
@@ -31,11 +29,13 @@ const Register = () => {
 						Login
 					</button>
 				</div>
-				{selectedTab === 'signup' ? (
-					<Signup styles={styles} />
-				) : (
-					<Login styles={styles} />
-				)}
+				<div className={styles.formFields}>
+					{selectedTab === 'signup' ? (
+						<Signup styles={styles} />
+					) : (
+						<Login styles={styles} />
+					)}
+				</div>
 			</div>
 		</div>
 	);
