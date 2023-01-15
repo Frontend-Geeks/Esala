@@ -2,9 +2,10 @@ import { useState, useContext } from 'react';
 import { Input, Button, NavLink } from '@mantine/core';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const API_URL = 'api/auth/';
 
-const Signup = ({ styles }) => {
+const Signup = ({ styles }: any) => {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -22,14 +23,25 @@ const Signup = ({ styles }) => {
 				password: password,
 			})
 			.then((res) => {
-				if (res.data) {
-					localStorage.setItem('user', JSON.stringify(res.data));
-					navigate('/');
-				}
-				console.log(res);
+				localStorage.setItem('user', JSON.stringify(res.data));
+				toast.success('User created!', {
+					position: 'bottom-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'dark',
+				});
+				navigate('/');
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				toast.error('Email already exist!');
+			});
 	};
+
+	console.log();
 
 	return (
 		<>
@@ -54,15 +66,17 @@ const Signup = ({ styles }) => {
 						}
 					/>
 				</div>
-				<label>Password : </label>
-				<Input
-					type="password"
-					placeholder="Enter your password"
-					value={password}
-					onChange={(e) =>
-						setFormData({ ...formData, password: e.target.value })
-					}
-				/>
+				<div className={styles.inputField}>
+					<label>Password : </label>
+					<Input
+						type="password"
+						placeholder="Enter your password"
+						value={password}
+						onChange={(e) =>
+							setFormData({ ...formData, password: e.target.value })
+						}
+					/>
+				</div>
 
 				<Button type="submit" onClick={handleSubmit}>
 					Submit
