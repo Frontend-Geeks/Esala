@@ -1,7 +1,10 @@
 const asyncHandler = require('express-async-handler');
+const jwt = require('jsonwebtoken');
+require('dotenv');
 const {
 	getAuth,
 	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
 	updateProfile,
 } = require('firebase/auth');
 const { getFirestore, collection, addDoc } = require('firebase/firestore');
@@ -14,7 +17,7 @@ const createUser = asyncHandler(async (req, res) => {
 		const { name, email, password } = req.body;
 
 		if (!name || !email || !password) {
-			res.status(400);
+			res.status(400).json();
 			throw new Error('Please add all fields');
 		}
 
@@ -22,28 +25,51 @@ const createUser = asyncHandler(async (req, res) => {
 			.then(async (cred) => {
 				const docRef = await addDoc(collection(db, 'users'), {
 					userId: `${cred.user.uid}`,
+					token: generateToken(cred.user.uid),
 				});
 				await updateProfile(cred.user, {
 					displayName: name,
 				});
+				res.status(201).json({
+					_id: cred.user.uid,
+					name: cred.user.displayName,
+					email: cred.user.email,
+					token: generateToken(cred.user.uid),
+				});
 			})
-			.catch((err) => console.log(err));
-
-		if (user.ok()) {
-			res.status(201).json({
-				_id: user.uid,
-				name: user.name,
-				email: user.email,
-			});
-		} else {
-		}
+			.catch((err) =>
+				res.status(400).json({ errorMessage: 'Email already exist!' }),
+			);
 	} catch (err) {
-		console.log(err);
 		res.status(400);
-		throw new Error('Invalid user data');
+		throw new Error('Email already exist!');
 	}
 });
 
-const loginUser = asyncHandler(async (req, res) => {});
+const loginUser = asyncHandler(async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		const user = await signInWithEmailAndPassword(auth, email, password)
+			.then((cred) => {
+				res.status(201).json({
+					_id: cred.user.uid,
+					name: cred.user.displayName,
+					email: cred.user.email,
+					token: generateToken(cred.user._id),
+				});
+			})
+			.catch((err) =>
+				res.status(400).json({ errorMessage: 'Invalid email or password!' }),
+			);
+	} catch (err) {
+		res.status(400);
+		throw new Error('Invalid email or password!');
+	}
+});
+
+const generateToken = (id) => {
+	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+};
 
 module.exports = { createUser, loginUser };
