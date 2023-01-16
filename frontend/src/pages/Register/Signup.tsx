@@ -3,6 +3,7 @@ import { Input, Button, NavLink } from '@mantine/core';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Select } from '@mantine/core';
 const API_URL = 'api/auth/';
 
 const Signup = ({ styles }: any) => {
@@ -10,8 +11,9 @@ const Signup = ({ styles }: any) => {
 		name: '',
 		email: '',
 		password: '',
+		role: 'student',
 	});
-	const { name, email, password } = formData;
+	const { name, email, password, role } = formData;
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e: any) => {
@@ -21,6 +23,7 @@ const Signup = ({ styles }: any) => {
 				name: name,
 				email: email,
 				password: password,
+				role: role,
 			})
 			.then((res) => {
 				localStorage.setItem('user', JSON.stringify(res.data));
@@ -41,7 +44,7 @@ const Signup = ({ styles }: any) => {
 			});
 	};
 
-	console.log();
+	console.log(formData);
 
 	return (
 		<>
@@ -77,6 +80,20 @@ const Signup = ({ styles }: any) => {
 						}
 					/>
 				</div>
+				{/* <div className={styles.inputField} style={{ flexDirection: 'column' }}>
+					<label style={{ alignSelf: 'flex-start' }}>
+						Teacher or Student :{' '}
+					</label>
+					<Select
+						placeholder="Pick one"
+						data={[
+							{ value: 'teacher', label: 'Teacher' },
+							{ value: 'student', label: 'Student' },
+						]}
+						color="dark"
+						onChange={(e) => setFormData({ ...formData, role:  })}
+					/>
+				</div> */}
 
 				<Button type="submit" onClick={handleSubmit}>
 					Submit
