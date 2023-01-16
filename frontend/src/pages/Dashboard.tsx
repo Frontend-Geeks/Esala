@@ -1,6 +1,10 @@
 import { Grid, Text } from '@mantine/core';
 
 const Dashboard = ({ data }: any) => {
+	const CURRENT_USER = JSON.parse(localStorage.getItem('user') || '');
+
+	console.log(CURRENT_USER);
+
 	return (
 		<Grid
 			p="md"
