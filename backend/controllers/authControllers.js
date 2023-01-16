@@ -7,17 +7,23 @@ const {
 	signInWithEmailAndPassword,
 	updateProfile,
 } = require('firebase/auth');
-const { getFirestore, collection, addDoc } = require('firebase/firestore');
+const {
+	getFirestore,
+	collection,
+	addDoc,
+	doc,
+	getDoc,
+} = require('firebase/firestore');
 
 const auth = getAuth();
 const db = getFirestore();
 
 const createUser = asyncHandler(async (req, res) => {
 	try {
-		const { name, email, password } = req.body;
+		const { name, email, password, role } = req.body;
 
-		if (!name || !email || !password) {
-			res.status(400).json();
+		if (!name || !email || !password || !role) {
+			res.status(400).json({ errorMessage: 'Please add all fields' });
 			throw new Error('Please add all fields');
 		}
 
@@ -25,6 +31,7 @@ const createUser = asyncHandler(async (req, res) => {
 			.then(async (cred) => {
 				const docRef = await addDoc(collection(db, 'users'), {
 					userId: `${cred.user.uid}`,
+					role: role,
 					token: generateToken(cred.user.uid),
 				});
 				await updateProfile(cred.user, {
