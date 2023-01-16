@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/lessons', require('./routes/lessonRoutes'));
 
 app.listen(process.env.PORT, () => {
 	console.log(`listening on port ${process.env.PORT}`);
