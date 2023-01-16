@@ -9,7 +9,7 @@ body {
 	position: absolute;
 	left: 0;
 	right: 0;
-	overflow-y: hidden;
+	overflow-x: hidden;
 	background-color: #111213;
 	font-family: poppins;
 }
