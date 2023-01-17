@@ -13,15 +13,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const data = {
 	NavElements: ['Home', 'Lessons', 'Games'],
 	DashboardItems: [
-		'Lesson 1',
-		'Lesson 2',
-		'Lesson 3',
-		'Lesson 4',
-		'Lesson 5',
-		'Lesson 6',
-		'Lesson 7',
-		'Lesson 8',
-		'Lesson 9',
+		'HTML and How It works',
+		'Equations & easy ways to solve them',
+		'Photosysthesis in a nutshell..',
+		'What is Cyber Security',
+		'Solar Family',
+		'Importance of micro-organisms..',
+		'Main Logic Gates',
+		'Algebraic Expressions',
+		'Properties of Matter',
 	],
 };
 
