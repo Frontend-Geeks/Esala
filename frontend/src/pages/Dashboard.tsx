@@ -1,4 +1,7 @@
-import { Grid, Text } from '@mantine/core';
+import { Grid, Image, Text } from '@mantine/core';
+import science_cover from '../assets/science_cover.png';
+import geography_cover from '../assets/geography_cover.png';
+import ict_cover from '../assets/ict_cover.png';
 
 const Dashboard = ({ data }: any) => {
 	const CURRENT_USER = JSON.parse(localStorage.getItem('user') || '');
@@ -15,24 +18,50 @@ const Dashboard = ({ data }: any) => {
 				alignItems: 'center',
 			}}
 		>
-			{data.DashboardItems.map((element: string) => (
-				<Grid.Col
-					span={3}
-					sx={{
-						backgroundColor: '#606060',
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						height: '225px',
-						width: '200px',
-						borderRadius: '10px',
-						margin: '15px 40px 15px 40px',
-					}}
-					key={element}
-				>
-					<Text sx={{ fontSize: '20px', fontWeight: 450 }}>{element}</Text>
-				</Grid.Col>
-			))}
+			{data.DashboardItems.map((element: string) => {
+				let selectImg = '';
+
+				if (element[1] === 'science') {
+					selectImg = science_cover;
+				} else if (element[1] === 'ict') {
+					selectImg = ict_cover;
+				} else if (element[1] === 'geography') {
+					selectImg = geography_cover;
+				}
+
+				return (
+					<Grid.Col
+						span={3}
+						sx={{
+							backgroundColor: '#242424',
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'center',
+							alignItems: 'center',
+							height: '225px',
+							width: '200px',
+							borderRadius: '10px',
+							margin: '15px 40px 15px 40px',
+						}}
+						key={element}
+					>
+						<Image src={selectImg} radius="md" />
+						<Text
+							sx={{
+								fontSize: '20px',
+								fontWeight: 600,
+								fontFamily: 'consolas',
+								margin: '5px 0 0 0',
+								color: '#fff',
+								textAlign: 'center',
+								overflow: 'hidden',
+							}}
+						>
+							{element[0]}
+						</Text>
+					</Grid.Col>
+				);
+			})}
 		</Grid>
 	);
 };
