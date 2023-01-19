@@ -2,6 +2,7 @@ import { Grid, Image, Text } from '@mantine/core';
 import science_cover from '../assets/science_cover.png';
 import geography_cover from '../assets/geography_cover.png';
 import ict_cover from '../assets/ict_cover.png';
+import maths_cover from '../assets/maths_cover.png';
 
 const Dashboard = ({ data }: any) => {
 	const CURRENT_USER = JSON.parse(localStorage.getItem('user') || '');
@@ -27,6 +28,8 @@ const Dashboard = ({ data }: any) => {
 					selectImg = ict_cover;
 				} else if (element[1] === 'geography') {
 					selectImg = geography_cover;
+				} else if (element[1] === 'maths') {
+					selectImg = maths_cover;
 				}
 
 				return (
